@@ -17,7 +17,13 @@ export const POST =  async () => {
     await prisma.analysis.create({
         data: {
             entryId: entry.id,
-            ...analysis,
+            summary: analysis?.summary || "",
+            mood: analysis?.mood || "",
+            color: analysis?.color || "",
+            sentimentScore: analysis?.sentimentScore || 0,
+            negative: analysis?.negative || false,
+            subject: analysis?.subject || "",
+        
         }
     })
     return NextResponse.json({data: {...entry, analysis: analysis}})
